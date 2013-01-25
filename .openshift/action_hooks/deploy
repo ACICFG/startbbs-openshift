@@ -1,0 +1,21 @@
+#!/bin/bash
+# This deploy hook gets executed after dependencies are resolved and the
+# build hook has been run but before the application has been started back
+# up again.  This script gets executed directly, so it could be python, php,
+# ruby, etc.
+
+
+settingsfile=$OPENSHIFT_REPO_DIR/php/app/config/database.php
+
+
+sed -i 's/OPENSHIFT_MYSQL_DB_USERNAME/'$OPENSHIFT_MYSQL_DB_USERNAME'/' $settingsfile
+sed -i 's/OPENSHIFT_MYSQL_DB_HOST/'$OPENSHIFT_MYSQL_DB_HOST'/' $settingsfile
+sed -i 's/OPENSHIFT_MYSQL_DB_PORT/'$OPENSHIFT_MYSQL_DB_PORT'/' $settingsfile
+sed -i 's/OPENSHIFT_MYSQL_DB_PASSWORD/'$OPENSHIFT_MYSQL_DB_PASSWORD'/' $settingsfile
+sed -i 's/OPENSHIFT_APP_NAME/'$OPENSHIFT_APP_NAME'/' $settingsfile
+
+chmod 777 $OPENSHIFT_REPO_DIR/php/
+chmod 777 $OPENSHIFT_REPO_DIR/php/app
+chmod 777 $OPENSHIFT_REPO_DIR/php/app/cache
+chmod 777 $OPENSHIFT_REPO_DIR/php/app/config -R
+chmod 777 $OPENSHIFT_REPO_DIR/php/uploads -R
