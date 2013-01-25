@@ -1,7 +1,7 @@
-YouBBS-Openshift
+StartBBS-Openshift
 ================
 
-YouBBS-Openshift
+StartBBS-Openshift
 
 This is a simple BBS.
 
