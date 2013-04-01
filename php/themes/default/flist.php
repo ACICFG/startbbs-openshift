@@ -7,13 +7,22 @@
 <meta content='width=device-width, initial-scale=1.0' name='viewport'>
 <title><?=$title?>- <?=$settings['site_name']?></title>
 <?php $this->load->view ('header-meta');?>
+<script charset="utf-8" src="<?php echo base_url('plugins/kindeditor/kindeditor-min.js');?>"></script>
+<script charset="utf-8" src="<?php echo base_url('plugins/kindeditor/lang/zh_CN.js');?>"></script>
+<?php if($this->config->item('show_editor')=='on'){?>
+<script charset="utf-8" src="<?php echo base_url('plugins/kindeditor/keset.js');?>"></script>
+<?} else {?>
+<link rel="stylesheet" href="<?php echo base_url('plugins/kindeditor/themes/default/default.css');?>" />
+<script charset="utf-8" src="<?php echo base_url('plugins/kindeditor/keupload.js');?>"></script>
+<?}?>
 </head>
 <body id="startbbs">
 <?php $this->load->view ('header');?>
 
 <div id="wrap">
 <div class="container" id="page-main">
-<div class="row-fluid"><div class='span8'>
+<div class="row-fluid">
+<div class='span8'>
 
 
 <div class='box'>
@@ -37,11 +46,11 @@
 <table border='0' cellpadding='0' cellspacing='0' width='100%'>
 <tr>
 <td class='avatar' valign='top'>
-<a href="/user/info/<?php echo $v['uid'];?>" class="profile_link" title="<?php echo $v['username'];?>">
+<a href="<?php echo site_url('user/info/'.$v['uid']);?>" class="profile_link" title="<?php echo $v['username'];?>">
 <?php if($v['avatar']) {?>
-<img alt="<?php echo $v['username'];?> medium avatar" class="medium_avatar" src="<?php echo $v['avatar'];?>" />
+<img alt="<?php echo $v['username'];?> medium avatar" class="medium_avatar" src="<?echo base_url();?><?php echo $v['avatar'];?>" />
 <?php } else {?>
-<img alt="<?php echo $v['username'];?> medium avatar" class="medium_avatar" src="/uploads/avatar/default.jpg" />
+<img alt="<?php echo $v['username'];?> medium avatar" class="medium_avatar" src="<?echo base_url('uploads/avatar/default.jpg');?>" />
 <?php }?>
 </a>
 </td>
@@ -51,17 +60,17 @@
 </div>
 <div class='sep3'></div>
 <h2 class='topic_title'>
-<a href="/forum/view/<?=$v['fid']?>" class="startbbs topic"><?php echo $v['title'];?></a>
+<a href="<?php echo site_url('forum/view/'.$v['fid']);?>" class="startbbs topic"><?php echo $v['title'];?></a>
 </h2>
 <div class='topic-meta'>
-<a href="/forum/flist/<?=$v['cid']?>" class="node"><?=$category['cname'];?></a>
+<a href="<?php echo site_url('forum/flist/'.$v['cid']);?>" class="node"><?=$category['cname'];?></a>
 &nbsp;&nbsp;•&nbsp;&nbsp;
-<a href="/user/info/<?php echo $v['uid'];?>" class="dark startbbs profile_link" title="<?php echo $v['username'];?>"><?php echo $v['username'];?></a>
+<a href="<?php echo site_url('user/info/'.$v['uid']);?>" class="dark startbbs profile_link" title="<?php echo $v['username'];?>"><?php echo $v['username'];?></a>
 &nbsp;&nbsp;•&nbsp;&nbsp;
 <?php echo $this->myclass->friendly_date($v['addtime']);?>
 &nbsp;&nbsp;•&nbsp;&nbsp;
 最后回复来自
-<a href="/user/info/<?php echo $v['ruid'];?>" class="startbbs profile_link" title="agred"><?php echo $v['rname'];?></a>
+<a href="<?php echo site_url('user/info/'.$v['ruid']);?>" class="startbbs profile_link" title="agred"><?php echo $v['rname'];?></a>
 </div>
 </td>
 </tr>
@@ -92,8 +101,8 @@
 创建新话题
 </div>
 <div class='inner'>
-<div class='alert alert-info'>如果标题已经包含你想说的话，内容可以留空。</div>
-<form accept-charset="UTF-8" action="/forum/add" class="simple_form form-vertical" id="new_topic" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="saf8/EK6n+k1mxuvmmf8KQNiSp64MfnXn4+xk26ccMA=" />
+<!--<div class='alert alert-info'>如果标题已经包含你想说的话，内容可以留空。</div>-->
+<form accept-charset="UTF-8" action="<?php echo site_url('forum/add');?>" class="simple_form form-vertical" id="new_topic" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="saf8/EK6n+k1mxuvmmf8KQNiSp64MfnXn4+xk26ccMA=" />
 <input name="cid" type="hidden" value="<?=$category['cid'];?>" />
 </div>
 <a name='new_topic'>
@@ -102,23 +111,27 @@
 <input class="string required span4" id="topic_title" maxlength="150" name="title" size="50" type="text" />
 <span class="help-inline red"><?php echo form_error('title');?></span>
 </div></div>
+<?php if($this->config->item('show_editor')=='off'){?>
 <div class='pull-right'>
 <a class='fileupload-btn action_label'>
 <span id='upload-tip'>上传图片</span>
-<input id='fileupload' multiple name='upyun_image[asset][]' type='file'>
 </a>
 </div>
+<?}?>
 
 <div id='preview-widget'>
 <a href="javascript:void(0);" class="action_label cancel_preview current_label" data-ref="topic_content">编辑</a>
 <div id='preview'></div>
 </div>
 
-<div class="control-group text optional"><div class="controls"><textarea class="text optional" cols="40" id="topic_content" name="content" placeholder="话题内容" rows="10" style="width: 98%;">
+<div class="control-group text optional">
+<div class="controls" id="textContain">
+<textarea class="text optional" cols="40" id="topic_content" name="content" placeholder="话题内容" rows="10" style="width: 98%;">
 </textarea>
 <span class="help-inline red"><?php echo form_error('content');?></span>
 </div></div>
 <input class="btn btn-primary btn-inverse" data-disable-with="正在提交" name="commit" type="submit" value="创建" />
+<small class='gray'>(支持 Ctrl + Enter 快捷键)</small>
 </form>
 
 </div>
@@ -126,10 +139,11 @@
 
 </div>
 <div class='span4' id='Rightbar'>
-<?php $this->load->view('block/right_login')?>
-
+<?php $this->load->view('block/right_login');?>
+<?php $this->load->view('block/right_cates');?>
 <?php $this->load->view('block/right_ad');?>
 
 </div>
 </div></div></div>
+
 <?php $this->load->view ('footer'); ?>

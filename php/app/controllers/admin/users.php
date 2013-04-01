@@ -15,7 +15,7 @@ class Users extends Admin_Controller
 		$limit = 10;
 		$config['uri_segment'] = 4;
 		$config['use_page_numbers'] = TRUE;
-		$config['base_url'] = '/admin/users';
+		$config['base_url'] = site_url('admin/users');
 		$config['total_rows'] = $this->db->count_all('users');
 		$config['per_page'] = $limit;
 		$config['first_link'] ='首页';
@@ -59,7 +59,7 @@ class Users extends Admin_Controller
 				array('value'=>$this->input->post('per_page_num'),'id'=>10)
 			);
 			$this->db->update_batch('settings', $str, 'id');
-			$this->myclass->notice('alert("网站设置更新成功");window.location.href="/admin/site_settings";');
+			$this->myclass->notice('alert("网站设置更新成功");window.location.href="'.site_url('admin/site_settings').'";');
 			
 		}
 		$data['item'] = $this->db->get_where('settings',array('type'=>0))->result_array();		
@@ -82,7 +82,7 @@ class Users extends Admin_Controller
 				'money'=> $this->input->post('money')
 			);
 			if($this->user_m->update_user($uid, $str)){
-				$this->myclass->notice('alert("修改用户成功");window.location.href="/admin/users";');
+				$this->myclass->notice('alert("修改用户成功");window.location.href="'.site_url('admin/users').'";');
 			}
 
 		}

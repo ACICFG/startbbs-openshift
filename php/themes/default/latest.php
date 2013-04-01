@@ -7,21 +7,22 @@
  </head>
 
  <body>
-<div class='cell comment_header muted'>
+ <?php foreach($list as $key=>$v){?>
+ <?php if(($key%2)==0){?>
+<div class='cell comment_header muted' style="margin: 5px 0;">
+<?} else {?>
+<div class='cell muted'>
+<?}?>
 <div class='pull-right timeago'>
-23 小时前
+<?php echo $v['addtime']?>
 </div>
-admin
+<?php echo $v['rname']?>
 回复了
-<a href="/member/admin" class="startbbs profile_link" title="admin">admin</a>
+<a href="http://www.startbbs.com/user/info/<?php echo $v['uid']?>" class="startbbs profile_link" title="admin" target=_blank><?php echo $v['username']?></a>
 创建的话题
-<span class='chevron'>›</span>
-<a href="/t/1" class="startbbs">sssssssssssssss</a>
+<span class='chevron'>>></span>
+<a href="http://www.startbbs.com/forum/view/<?php echo $v['fid']?>" class="startbbs" target=_blank><?php echo $v['title']?></a>
 </div>
-<div class='inner'>
-<div class='reply_content'>
-xxxxxxxxxxxxxxxxx
-</div>
-</div>
+<?}?>
  </body>
 </html>

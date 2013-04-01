@@ -18,11 +18,11 @@
 
 <div class='box'>
 <div class='cell'>
-<div class='pull-right'><a href="/admin/users?nickname=admin" class="btn">返回用户管理</a></div>
-<a href="/" class="startbbs1">StartBBS</a> <span class="chevron">&nbsp;›&nbsp;</span> <a href="/admin">管理后台</a> <span class="chevron">&nbsp;›&nbsp;</span> 修改用户信息
+<div class='pull-right'><a href="<?php echo site_url('admin/users');?>" class="btn">返回用户管理</a></div>
+<a href="/" class="startbbs1">StartBBS</a> <span class="chevron">&nbsp;›&nbsp;</span> <a href="<?php echo site_url('admin/');?>">管理后台</a> <span class="chevron">&nbsp;›&nbsp;</span> 修改用户信息
 </div>
 <div class='cell'>
-<form accept-charset="UTF-8" action="/admin/users/edit/<?=$user['uid']?>" class="simple_form form-horizontal" id="edit_user_1" method="post" novalidate="novalidate">
+<form accept-charset="UTF-8" action="<?php echo site_url('admin/users/edit/'.$user['uid']);?>" class="simple_form form-horizontal" id="edit_user_1" method="post" novalidate="novalidate">
 <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="iM/k39XK4U+GmgVT7Ps8Ko3OhPrcTBqUSu4yKYPgAjk=" /></div>
 <div class="control-group string required">
 <label class="string required control-label" for="user_nickname">用户名</label>

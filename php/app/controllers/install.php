@@ -2,21 +2,24 @@
 #doc
 #	classname:	Install
 #	scope:		PUBLIC
-#
+#	StartBBS起点轻量开源社区系统
+#	author :doudou QQ:858292510 startbbs@126.com
+#	Copyright (c) 2013 http://www.startbbs.com All rights reserved.
 #/doc
 
-class Install extends Other_Controller
+class Install extends Install_Controller
 {
 	function __construct ()
 	{
 		parent::__construct();
 		$this->load->library('myclass');
+
 	}
 	public function index ()
 	{
-		$file=$_SERVER['DOCUMENT_ROOT'].'/install.lock';
+		$file=FCPATH.'install.lock';
 		if (file_exists($file)){
-			$this->myclass->notice('alert("系统已安装过");window.location.href="/";');
+			$this->myclass->notice('alert("系统已安装过");window.location.href="'.site_url().'";');
 		} else {
 		$this->load->view('install');
 		}
@@ -57,9 +60,10 @@ class Install extends Other_Controller
 		$userid = $this->input->post('admin');
 		$pwd = md5($this->input->post('pwd'));
 		$email = $this->input->post('email');
+		$sub_folder = $this->input->post('base_url');
 		$conn = mysql_connect($dbhost.':'.$dbport,$dbuser,$dbpwd);
 		mysql_select_db($dbname,$conn);
-		$sql = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/app/config/startbbs.sql');
+		$sql = file_get_contents(FCPATH.'app/config/startbbs.sql');
 		$sql = str_replace("sb_",$dbprefix,$sql);
 		$explode = explode(";",$sql);
 		$data['msg1']="创建表".$dbname."成功，请稍后……<br/>";
@@ -87,16 +91,26 @@ class Install extends Other_Controller
 		$dbconfig .= '$db[\'default\'][\'pconnect\'] = TRUE;';
 		$dbconfig .= '$db[\'default\'][\'db_debug\'] = TRUE;';
 		$dbconfig .= '$db[\'default\'][\'cache_on\'] = FALSE;';
-		$dbconfig .= '$db[\'default\'][\'cachedir\'] = \'\';';
+		$dbconfig .= '$db[\'default\'][\'cachedir\'] = \'app\/cache\';';
 		$dbconfig .= '$db[\'default\'][\'char_set\'] = \'utf8\';';
 		$dbconfig .= '$db[\'default\'][\'dbcollat\'] = \'utf8_general_ci\';';
 		$dbconfig .= '$db[\'default\'][\'swap_pre\'] = \'\';';
 		$dbconfig .= '$db[\'default\'][\'autoinit\'] = TRUE;';
 		$dbconfig .= '$db[\'default\'][\'stricton\'] = FALSE;';
-		$file = $_SERVER['DOCUMENT_ROOT'].'/app/config/database.php';
+		$file = FCPATH.'/app/config/database.php';
 		file_put_contents($file,$dbconfig);
+ 
+		//保存config文件
+		if($sub_folder){
+			$old_config = read_file(FCPATH.'app/config/myconfig.php');
+			$old_data = "sub_folder']	= ''";
+			$new_data = "sub_folder']	= '".$sub_folder."'";
+			$new_config = str_replace($old_data,$new_data,$old_config);
+			write_file(FCPATH.'app/config/myconfig.php', $new_config);
+		}
+
 		$data['msg3']="保存配置文件完成！";
-		touch($_SERVER['DOCUMENT_ROOT'].'/install.lock'); 
+		touch(FCPATH.'install.lock'); 
 		$data['msg4']="创建锁定安装文件install.lock成功";
 		$data['msg5']="安装startbbs成功！";
 		$this->load->view('install_step',$data);

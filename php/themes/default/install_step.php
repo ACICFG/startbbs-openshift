@@ -71,7 +71,7 @@
 <p class="green"><?=$msg4?></p>
 <p class="red"><?=$msg5?></p>
 <div class='form-actions'>
-<a href="/" id="dataTest" class="left btn btn-white btn-primary"><span>进入首页</span></a>
+<a href="<?php echo site_url('/');?>" id="dataTest" class="left btn btn-white btn-primary"><span>进入首页</span></a>
 </div>
 
 </div>

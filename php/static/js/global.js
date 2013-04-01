@@ -1,12 +1,12 @@
 
 // JavaScript Document
 $(function(){
-	$('#comment').bind("blur focus keydown keypress keyup", function(){
+	$('#reply_content').bind("blur focus keydown keypress keyup", function(){
 		recount();
 	});
     $("#myform").submit(function(){
 		//var submitData = $(this).serialize();
-		var comment = $("#comment").val();
+		var comment = $('#reply_content').val();
 		var fid = $("#fid").val();
 		if(comment==""){
 			$("#msg").show().html("你总得说点什么吧.").fadeOut(2000);
@@ -22,7 +22,7 @@ $(function(){
 		   success: function(msg){
 			  if(parseInt(msg)!=0){
 				 $('#saywrap').prepend(msg);
-				 $('#comment').val('');
+				 $('#reply_content').val('');
 				 recount();
 				 window.location.reload(true);
 			 }else{
@@ -37,7 +37,7 @@ $(function(){
 
 function recount(){
 	var maxlen=140;
-	var current = maxlen-$('#comment').val().length;
+	var current = maxlen-$('#reply_content').val().length;
 	$('.counter').html(current);
 
 	if(current<1 || current>maxlen){
@@ -58,12 +58,28 @@ function recount(){
 
 }
 
-	/*添加回复*/
-	$(".clickable").live('click',function(){
-		/*var name=$('a:first',$(this).parent()).text();*/
-		/*var data = $('.clickable').attr("data-mention");*/
-		var name =$('.clickable').attr('data-mention');
-		$('#comment').val('@'+name+' ').focus();
-		return false;
-	});
-
+//	/*添加回复*/
+//	$(".clickable").live('click',function(){
+//		/*var name=$('a:first',$(this).parent()).text();*/
+//		/*var data = $('.clickable').attr("data-mention");*/
+//		var name =$('.clickable').attr('data-mention');
+//		$('#reply_content').val('@'+name+' ').focus();
+//		return false;
+//	});
+// reply a reply
+function replyOne(username){
+    replyContent = $("#reply_content");
+	oldContent = replyContent.val();
+	prefix = "@" + username + " ";
+	newContent = ''
+	if(oldContent.length > 0){
+	    if (oldContent != prefix) {
+	        newContent = oldContent + "\n" + prefix;
+	    }
+	} else {
+	    newContent = prefix
+	}
+	replyContent.focus();
+	replyContent.val(newContent);
+	moveEnd($("#reply_content"));
+}

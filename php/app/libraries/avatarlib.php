@@ -2,7 +2,10 @@
 class Avatarlib {
 	function __construct() {
 		$this->ci = & get_instance ();
+		//$test =& get_config();
+		//$this->base_folder=$test['base_folder'];
 		$this->base_url = base_url();
+
 		/**
 		 *上传响应程序URL
 		 */
@@ -32,19 +35,16 @@ class Avatarlib {
 		$input = urlencode ( "uid=$uid" );
 		$uc_avatarflash = $this->base_url . '/static/images/camera.swf?inajax=1&appid=1&input=' . $input . '&agent=' . md5 ( $_SERVER ['HTTP_USER_AGENT'] ) . '&ucapi=' . urlencode ( $this->doaction ) . '&avatartype=real';
 		if ($returnhtml) {
-			return '<OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" WIDTH="450" HEIGHT="250" id="mycamera" align="middle">
-				<param name="allowScriptAccess" value="always" />
-				<param name="scale" value="exactfit" />
-				<param name="wmode" value="transparent">
-				<PARAM VALUE="' . $uc_avatarflash . '"> 
-				<PARAM VALUE=high> 
-				<PARAM VALUE=#FFFFFF> 
-				<param name="menu" value="false" />
-				<EMBED src="' . $uc_avatarflash . '" quality=high bgcolor=#FFFFFF WIDTH="450" HEIGHT="250" 
-				name="mycamera" align="middle" allowScriptAccess="always" allowFullScreen="false" scale="exactfit" wmode="transparent" TYPE="application/x-shockwave-flash" 
-				PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"> 
-				</EMBED> 
-				</OBJECT>';
+			return '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="450" height="253" id="mycamera" align="middle">
+			<param name="allowScriptAccess" value="always" />
+			<param name="scale" value="exactfit" />
+			<param name="wmode" value="transparent" />
+			<param name="quality" value="high" />
+			<param name="bgcolor" value="#ffffff" />
+			<param name="movie" value="'.$uc_avatarflash.'" />
+			<param name="menu" value="false" />
+			<embed src="'.$uc_avatarflash.'" quality="high" bgcolor="#ffffff" width="450" height="253" name="mycamera" align="middle" allowScriptAccess="always" allowFullScreen="false" scale="exactfit"  wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+		</object>';
 		} else {
 			return array (' #ffffff', 'wmode', 'transparent', 'menu', 'false', 'swLiveConnect', 'true', 'allowScriptAccess', 'always' );
 		}
@@ -143,6 +143,7 @@ class Avatarlib {
 		$fp = @fopen ( $smallavatarfile, 'wb' );
 		@fwrite ( $fp, $smallavatar );
 		@fclose ( $fp );
+
 		//重修尺寸
 		$this->resizeimg($bigavatarfile,100,100);
 		$this->resizeimg($middleavatarfile,48,48);
@@ -180,16 +181,16 @@ class Avatarlib {
 	function get_avatar($uid, $size = 'big') {
 		$size = in_array ( $size, array ('big', 'middle', 'small' ) ) ? $size : 'big';
 		$uid = abs ( intval ( $uid ) );
-		$uid = sprintf ( "%09d", $uid );
-		$dir1 = substr ( $uid, -1, 1 );
-		$dir2 = substr ( $uid, -2, 2 );
-		return $dir1 . '/' . $dir2 . '/'. substr ( $uid, - 2 ) . "_avatar_$size.jpg";
+		$newuid = sprintf ( "%09d", $uid );
+		$dir1 = substr ( $newuid, -1, 1 );
+		$dir2 = substr ( $newuid, -2, 2 );
+		return $dir1 . '/' . $dir2 . '/'.$uid. "_avatar_$size.jpg";
 	}
 	function avatar_show($uid, $size = 'small', $returnsrc = FALSE) {
 		$size = in_array ( $size, array ('big', 'middle', 'small' ) ) ? $size : 'small';
 		$avatarfile = $this->get_avatar ( $uid, $size );
 
-		return $returnsrc ? $this->base_url . $this->avatarpath . $avatarfile : '<img class="'.$size.'_avatar" src="' . $this->base_url . $this->avatarpath . $avatarfile . '" onerror="this.onerror=null;this.src=\'' . $this->base_url . '/static/images/noavatar_' . $size . '.gif\'">';
+		return $returnsrc ? $this->base_url . $this->avatarpath . $avatarfile : '<img class="'.$size.'_avatar" src="' . $this->base_url . $this->avatarpath . $avatarfile . '" onerror="this.onerror=null;this.src=\'' . $this->base_url . '/static/images/noavatar_' . $size . '.png\'">';
 	}
 	function resizeimg($source,$width,$height) {
 		$this->ci->load->library('image_lib');

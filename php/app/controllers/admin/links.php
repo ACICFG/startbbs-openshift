@@ -17,7 +17,7 @@ class Links extends Admin_Controller
 		$limit = 20;
 		$config['uri_segment'] = 4;
 		$config['use_page_numbers'] = TRUE;
-		$config['base_url'] = '/admin/links/index/';
+		$config['base_url'] = site_url('admin/links/index/');
 		$config['total_rows'] = $this->db->count_all('links');
 		$config['per_page'] = $limit;
 		$config['prev_link'] = '&larr;';
@@ -55,7 +55,7 @@ class Links extends Admin_Controller
 		$this->myclass->notice('alert("确定要删除此链接吗！");');
 		//删除链接
 		if($this->link_m->del_link($id)){
-		$this->myclass->notice('alert("删除链接成功！");window.location.href="/admin/links";');
+		$this->myclass->notice('alert("删除链接成功！");window.location.href="'.site_url('admin/links').'";');
 		}
 
 	}
@@ -70,7 +70,7 @@ class Links extends Admin_Controller
 				'is_hidden'=>$this->input->post('is_hidden')
 			);
 			if($this->link_m->update_link($id, $str)){
-				$this->myclass->notice('alert("修改链接成功");window.location.href="/admin/links";');
+				$this->myclass->notice('alert("修改链接成功");window.location.href="'.site_url('admin/links').'";');
 			}
 
 		}
@@ -87,7 +87,7 @@ class Links extends Admin_Controller
 				'is_hidden'=>$this->input->post('is_hidden')
 			);
 			if($this->link_m->add_link($str)){
-			$this->myclass->notice('alert("添加链接成功！");window.location.href="/admin/links";');
+			$this->myclass->notice('alert("添加链接成功！");window.location.href="'.site_url('admin/links').'";');
 			}
 
 		}

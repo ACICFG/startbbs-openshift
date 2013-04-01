@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('session','auth');
+$autoload['libraries'] = array('session','auth','qqclass');
 
 
 /*
@@ -64,7 +64,7 @@ $autoload['libraries'] = array('session','auth');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url');
+$autoload['helper'] = array('url','file');
 /*
 | -------------------------------------------------------------------
 |  Auto-load Config files
@@ -78,7 +78,7 @@ $autoload['helper'] = array('url');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('myconfig','openid');
 
 
 /*

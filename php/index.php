@@ -2,7 +2,7 @@
 
 /*
  *---------------------------------------------------------------
- * APPLICATION ENVIRONMENT
+ * 应用环境
  *---------------------------------------------------------------
  *
  * You can load different configurations depending on your
@@ -21,7 +21,7 @@
 	define('ENVIRONMENT', 'development');
 /*
  *---------------------------------------------------------------
- * ERROR REPORTING
+ * 错误报告
  *---------------------------------------------------------------
  *
  * Different environments will require different levels of error reporting.
@@ -48,7 +48,7 @@ if (defined('ENVIRONMENT'))
 
 /*
  *---------------------------------------------------------------
- * SYSTEM FOLDER NAME
+ * 系统文件夹
  *---------------------------------------------------------------
  *
  * This variable must contain the name of your "system" folder.
@@ -60,7 +60,7 @@ if (defined('ENVIRONMENT'))
 
 /*
  *---------------------------------------------------------------
- * APPLICATION FOLDER NAME
+ * 应用文件夹
  *---------------------------------------------------------------
  *
  * If you want this front controller to use a different "application"

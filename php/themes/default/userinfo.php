@@ -19,9 +19,9 @@
 <tr>
 <td align='center' valign='top' width='73'>
 <?php if($avatar){?>
-<img alt="<?=$username?> large avatar" class="large_avatar" style="width:72px;" src="<?=$big_avatar?>"/>
+<img alt="<?=$username?> large avatar" class="large_avatar" style="width:72px;" src="<?php echo base_url($big_avatar)?>"/>
 <?php } else{?>
-<img alt="<?=$username?> large avatar" class="large_avatar" style="width:72px;" src="/uploads/avatar/default.jpg"/>
+<img alt="<?=$username?> large avatar" class="large_avatar" style="width:72px;" src="<?php echo base_url('uploads/avatar/default.jpg')?>"/>
 <?php }?>
 </td>
 <td valign='top' width='10'></td>
@@ -77,7 +77,7 @@
 </tr>
 </table>
 </div>
-<div class='inner'><p><?=$introduction?></p><p>联系方式: <a href="mailto:<?=$email?>" class="external mail"><?=$email?></a></p></div>
+<div class='inner'><p><?=$introduction?></p><!--<p>联系方式: <a href="mailto:<?=$email?>" class="external mail"><?=$email?></a></p>--></div>
 </div>
 <div class='box'>
 <div class='box-header'>
@@ -90,15 +90,15 @@
 <tr>
 <td valign='middle' width='auto'>
 <span class='bigger'>
-<a href="/forum/view/<?=$v['fid']?>" class="startbbs topic"><?=$v['title']?></a>
+<a href="<?php echo site_url('forum/view/'.$v['fid']);?>" class="startbbs topic"><?=$v['title']?></a>
 </span>
 <div class='topic-meta'>
-<a href="/go/noticeboard" class="node">公告栏</a>
+<a href="<?php echo site_url('forum/flist/'.$v['cid']);?>" class="node"><?=$v['cname']?></a>
 &nbsp;&nbsp;•&nbsp;&nbsp;
 <?=$this->myclass->friendly_date($v['addtime'])?>
 &nbsp;&nbsp;•&nbsp;&nbsp;
 最后回复来自
-<a href="/member/marschris" class="startbbs profile_link" title="marschris">marschris</a>
+<a href="<?php echo site_url('user/info/'.$v['ruid']);?>" class="startbbs profile_link" title="marschris"><?=$v['rname']?></a>
 </div>
 </td>
 <td align='right' valign='middle' width='40'>
@@ -111,7 +111,7 @@
 
 <div class='inner'>
 <span class='chevron'>»</span>
-<small><a href="/member/daqing/topics" class="startbbs"><?=$username?> 创建的更多主题</a></small>
+<small><a href="/member/admin/topics" class="startbbs"><?=$username?> 创建的更多主题</a></small>
 </div>
 </div>
 <div class='box'>
@@ -125,10 +125,10 @@
 <?=$this->myclass->friendly_date($v['replytime'])?>
 </div>
 回复了
-<a href="/user/info/<?=$v['uid']?>" class="startbbs profile_link" title="<?=$v['username']?>"><?=$v['username']?></a>
+<a href="<?php echo site_url('user/info/'.$v['uid']);?>" class="startbbs profile_link" title="<?=$v['username']?>"><?=$v['username']?></a>
 <?=$this->myclass->friendly_date($v['addtime'])?>
 <span class='chevron'>›</span>
-<a href="/forum/view/<?=$v['fid']?>" class="startbbs"><?=$v['title']?></a>
+<a href="<?php echo site_url('forum/view/'.$v['fid']);?>" class="startbbs"><?=$v['title']?></a>
 </div>
 <div class='inner'>
 <div class='reply_content'>

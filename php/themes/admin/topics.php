@@ -15,7 +15,7 @@
 
 <div class='box'>
 <div class='cell'>
-<a href="/" class="startbbs1">StartBBS</a> <span class="chevron">&nbsp;›&nbsp;</span> <a href="/admin">管理后台</a> <span class="chevron">&nbsp;›&nbsp;</span> 讨论话题
+<a href="/" class="startbbs1">StartBBS</a> <span class="chevron">&nbsp;›&nbsp;</span> <a href="<?php echo site_url('admin/');?>">管理后台</a> <span class="chevron">&nbsp;›&nbsp;</span> 讨论话题
 </div>
 <div class='cell'>
 <?php if($topics){?>
@@ -41,13 +41,13 @@
 </strong>
 </td>
 <td class='auto'>
-<a href="/forum/flist/<?=$v['cid']?>"><?=$v['cname']?></a>
+<a href="<?php echo site_url('forum/flist/'.$v['cid']);?>"><?=$v['cname']?></a>
 </td>
 <td class='auto'>
-<a href="/forum/view/<?=$v['fid']?>"><?=$v['title']?></a>
+<a href="<?php echo site_url('forum/view/'.$v['fid']);?>"><?=$v['title']?></a>
 </td>
 <td class='auto'>
-<a href="/user/info/<?=$v['uid']?>" class="rabel profile_link" title="admin"><?=$v['username']?></a>
+<a href="<?php echo site_url('user/info/'.$v['uid']);?>" class="rabel profile_link" title="admin"><?=$v['username']?></a>
 </td>
 <td align='right' class='auto'>
 <?=$v['comments']?>
@@ -59,8 +59,8 @@
 <small class='fade1'><?=date('Y-m-d',$v['addtime'])?></small>
 </td>
 <td class='w100'>
-<a href="/forum/edit/<?=$v['fid']?>" class="btn btn-small">编辑</a>
-<a href="/admin/topics/del/<?=$v['fid']?>/<?=$v['cid']?>/<?=$v['uid']?>" class="btn btn-small btn-danger" data-confirm="真的要删除吗？" data-method="delete" rel="nofollow">删除</a>
+<a href="<?php echo site_url('forum/edit/'.$v['fid']);?>" class="btn btn-small">编辑</a>
+<a href="<?php echo site_url('admin/topics/del/'.$v['fid'].'/'.$v['cid'].'/'.$v['uid']);?>" class="btn btn-small btn-danger" data-confirm="真的要删除吗？" data-method="delete" rel="nofollow">删除</a>
 </td>
 </tr>
 <?php } ?>

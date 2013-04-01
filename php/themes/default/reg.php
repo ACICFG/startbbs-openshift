@@ -15,7 +15,7 @@
 <a href="/" class="startbbs"><?=$settings['site_name']?></a> <span class="chevron">&nbsp;›&nbsp;</span> 注册
 </div>
 <div class='inner'>
-<form accept-charset="UTF-8" action="/user/reg/" class="simple_form form-horizontal" id="new_user" method="post" novalidate="novalidate">
+<form accept-charset="UTF-8" action="<?php echo site_url('user/reg');?>" class="simple_form form-horizontal" id="new_user" method="post" novalidate="novalidate">
 <div style="margin:0;padding:0;display:inline">
 <input name="utf8" type="hidden" value="&#x2713;" />
 <input name="authenticity_token" type="hidden" value="zHmHYEJbz9hP+SpTe153DJH8BobrJSJ63cDjsuZayGs=" /></div>
@@ -41,6 +41,21 @@
 <div class="controls">
 <input class="password optional" id="user_password_confirmation" name="password_c" size="50" type="password" value="<?php echo set_value('password_c'); ?>" /><span class="help-inline red"><?php echo form_error('password_c');?></span>
 </div></div>
+<?php if($this->config->item('show_captcha')=='on'){?>
+<div class="control-group captcha_code optional">
+<label class="captcha_code optional control-label" for="captcha_code">验证码</label>
+<div class="controls">
+<input class="string captcha_code optional" id="captcha_code" name="captcha_code" size="50" type="text" value="<?php echo set_value('captcha_code'); ?>" />
+<span class="help-inline red"> <a href="javascript:reloadcode();" title="更换一张验证码图片"><img src="<?php echo site_url('captcha_code');?>" name="checkCodeImg" id="checkCodeImg" border="0" /></a> <a href="javascript:reloadcode();">换一张</a><?php echo form_error('captcha_code');?></span>
+</div></div>
+<script language="javascript">
+//刷新图片
+function reloadcode() {//刷新验证码函数
+ var verify = document.getElementById('checkCodeImg');
+ verify.setAttribute('src', '<?php echo site_url('captcha_code?');?>' + Math.random());
+}
+</script>
+<?}?>
 <div class='form-actions'>
 <input class="btn btn-small btn-primary" name="commit" type="submit" value="注册" />
 </div>

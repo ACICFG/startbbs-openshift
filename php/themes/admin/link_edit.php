@@ -18,11 +18,11 @@
 
 <div class='box'>
 <div class='cell'>
-<div class='pull-right'><a href="/admin/links" class="btn">返回<?=$title?></a></div>
+<div class='pull-right'><a href="<?php echo site_url('admin/links');?>" class="btn">返回<?=$title?></a></div>
 <a href="/" class="startbbs1">StartBBS</a> <span class="chevron">&nbsp;›&nbsp;</span> <a href="/admin">管理后台</a> <span class="chevron">&nbsp;›&nbsp;</span> <?=$title?>
 </div>
 <div class='cell'>
-<form accept-charset="UTF-8" action="/admin/links/edit/<?=$link['id']?>" class="simple_form form-horizontal" id="edit_user_1" method="post" novalidate="novalidate">
+<form accept-charset="UTF-8" action="<?php echo site_url('admin/links/edit/'.$link['id']);?>" class="simple_form form-horizontal" id="edit_user_1" method="post" novalidate="novalidate">
 <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="iM/k39XK4U+GmgVT7Ps8Ko3OhPrcTBqUSu4yKYPgAjk=" /></div>
 <div class="control-group string required">
 <label class="string required control-label" for="name">网站名</label>

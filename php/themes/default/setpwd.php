@@ -15,15 +15,15 @@
 <a href="/" class="startbbs"><?=$settings['site_name']?></a> <span class="chevron">&nbsp;›&nbsp;</span> 设置
     <ul class="nav nav-tabs" style="margin-top:10px;">
     <li>
-    <a href="/user/settings">个人信息</a>
+    <a href="<?php echo site_url('user/settings');?>">个人信息</a>
     </li>
-    <li><a href="/user/upavatar">头像</a></li>
+    <li><a href="<?php echo site_url('user/upavatar');?>">头像</a></li>
     <li class="active"><a href="#">修改密码</a></li>
     </ul>
 </div>
 <span style="color:red" id="error"><?php echo isset($msg)?$msg:''; ?></span>
 <div class='inner'>
-<form accept-charset="UTF-8" action="/user/setpwd" class="simple_form form-horizontal" id="edit_user_313" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline">
+<form accept-charset="UTF-8" action="<?php echo site_url('user/setpwd');?>" class="simple_form form-horizontal" id="edit_user_313" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline">
 <input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="bFgf4gFtDOwT1iCoDRGI7aqc14eXt1h403ny+0VSrz0=" /></div>
 <strong class='fade'>如果你不想更改密码，请留空以下输入框。</strong>
 <div class='sep5'></div>

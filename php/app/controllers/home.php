@@ -2,7 +2,9 @@
 #doc
 #	classname:	Home
 #	scope:		PUBLIC
-#
+#	StartBBS起点轻量开源社区系统
+#	author :doudou QQ:858292510 startbbs@126.com
+#	Copyright (c) 2013 http://www.startbbs.com All rights reserved.
 #/doc
 
 class Home extends SB_Controller
@@ -20,10 +22,10 @@ class Home extends SB_Controller
 		//获取列表
 		$data['list'] = $this->forum_m->get_latest_forums(10);
 		$data['catelist'] =$this->cate_m->get_all_cates();
-		
-		$data['total_forums']=$this->db->count_all('forums');
+		$this->db->cache_on();
 		$data['total_forums']=$this->db->count_all('forums');
 		$data['total_comments']=$this->db->count_all('comments');
+		$this->db->cache_off();
 		$data['total_users']=$this->db->count_all('users');
 		$data['last_user']=$this->db->select('username',1)->order_by('uid','desc')->get('users')->row_array();
 
@@ -33,7 +35,8 @@ class Home extends SB_Controller
 	}
 	public function latest()
 	{
-		$this->load->view('latest');
+		$data['list'] = $this->forum_m->get_latest_forums(5);
+		$this->load->view('latest',$data);
 	}
 	public function search()
 	{

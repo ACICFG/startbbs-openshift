@@ -68,7 +68,12 @@ class Auth
 	public function is_login(){
 		$uid=$this->_CI->session->userdata('uid');
 		$password=$this->_CI->session->userdata('password');
-		$query=$this->_CI->db->get_where('users',array('uid'=>$uid,'password'=>$password));
+		$openid=$this->_CI->session->userdata('openid');
+		if(empty($password)){
+			$query=$this->_CI->db->get_where('users',array('uid'=>$uid,'openid'=>$openid));
+		} else{
+			$query=$this->_CI->db->get_where('users',array('uid'=>$uid,'password'=>$password));
+		}
 		if(!count($query->row())){
 				$user['lastlogin'] = time();
 				$user['token'] = sha1(time().rand());
@@ -92,12 +97,18 @@ class Auth
 	{
 		$gid=$this->_CI->session->userdata('gid');
 		/** 权限验证通过 */
-        return ($gid=='0')? TRUE : FALSE;
+        return ($gid!='' && $gid==0)? TRUE : FALSE;
 	}
 
 	public function is_user($uid)
 	{
-		return ($this->is_login() && $uid==$this->_CI->session->userdata('uid')) ? TRUE : FALSE;
+		$suid=$this->_CI->session->userdata('uid');
+		if($suid!='' && $uid==$suid){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+		//return ($this->is_login() && $uid==$this->_CI->session->userdata('uid')) ? TRUE : FALSE;
 	}
 	
 	 /**

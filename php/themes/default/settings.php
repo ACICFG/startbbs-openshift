@@ -17,13 +17,13 @@
     <li class="active">
     <a href="#">个人信息</a>
     </li>
-    <li><a href="/user/upavatar">头像</a></li>
-    <li><a href="/user/setpwd">修改密码</a></li>
+    <li><a href="<?php echo site_url('user/upavatar');?>">头像</a></li>
+    <li><a href="<?php echo site_url('user/setpwd');?>">修改密码</a></li>
     </ul>
 </div>
 
 <div class='inner'>
-<form accept-charset="UTF-8" action="/user/settings" class="simple_form form-horizontal" id="edit_user_313" method="post" novalidate="novalidate">
+<form accept-charset="UTF-8" action="<?php echo site_url('user/settings');?>" class="simple_form form-horizontal" id="edit_user_313" method="post" novalidate="novalidate">
 <!--<div style="margin:0;padding:0;display:inline">
 <input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="bFgf4gFtDOwT1iCoDRGI7aqc14eXt1h403ny+0VSrz0=" />
 </div>-->

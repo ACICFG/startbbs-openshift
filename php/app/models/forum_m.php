@@ -3,7 +3,9 @@
 #doc
 #	classname:	Forum_m
 #	scope:		PUBLIC
-#
+#	StartBBS起点轻量开源社区系统
+#	author :doudou QQ:858292510 startbbs@126.com
+#	Copyright (c) 2013 http://www.startbbs.com All rights reserved.
 #/doc
 
 class Forum_m extends SB_Model
@@ -57,7 +59,7 @@ class Forum_m extends SB_Model
 		$this->db->join('users b','b.uid = forums.uid','left');
 		$this->db->join('users c','c.uid = forums.ruid','left');
 		$this->db->join('categories d','d.cid = forums.cid','left');
-		$this->db->order_by('lastreply','desc');
+		$this->db->order_by('updatetime','desc');
 		$this->db->limit($limit);
 		$query = $this->db->get();
 		if($query->num_rows() > 0){
@@ -80,9 +82,14 @@ class Forum_m extends SB_Model
     }
 	public function get_forums_by_uid($uid,$num)
 	{
+		$this->db->select('forums.*, b.username as rname,c.cname');
+		$this->db->from('forums');
+		$this->db->where('forums.uid',$uid);
+		$this->db->join('users b', 'b.uid= forums.ruid','left');
+		$this->db->join('categories c','c.cid = forums.cid','left');
 		$this->db->limit($num);
 		$this->db->order_by('addtime','desc');
-		$query = $this->db->get_where('forums',array('uid'=>$uid));
+		$query = $this->db->get();
 		return $query->result_array();
 	}
 	public function get_all_forums($page, $limit)

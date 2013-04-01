@@ -41,9 +41,9 @@ class SB_Controller extends Base_Controller
 		//载入前台模板
 		$this->load->set_front_theme('default');
 		//判断安装
-		$file=$_SERVER['DOCUMENT_ROOT'].'/install.lock';
+		$file=FCPATH.'install.lock';
 		if (!is_file($file)){
-			redirect('/install');
+			redirect(site_url('install'));
 		}
 		$this->load->database();
 	 	//网站设定
@@ -62,9 +62,32 @@ class SB_Controller extends Base_Controller
 		 );
 		 //取一个用户信息
 		$data['user']=$this->db->select('uid,username,avatar')->where('uid',$this->session->userdata('uid'))->get('users')->row_array();
+		//获取二级目录
+		$data['base_folder'] = $this->config->item('base_folder');
 		//获取头像
 		$this->load->library('avatarlib');
-		$data['user']['big_avatar']='/uploads/avatar/'.$this->avatarlib->get_avatar($this->session->userdata('uid'), 'big');
+		$data['user']['big_avatar']='uploads/avatar/'.$this->avatarlib->get_avatar($this->session->userdata('uid'), 'big');
+		if(!file_exists($data['user']['big_avatar'])){
+			$data['user']['big_avatar']= 'uploads/avatar/avatar_large.jpg';
+		}
+		//获取分类
+		$this->load->model('cate_m');
+		$data['catelist'] =$this->cate_m->get_all_cates();
+
+		//右侧登录调用收藏贴子数
+			$favorites=$this->db->select('favorites')->where('uid',$this->session->userdata('uid'))->get('favorites')->row_array();
+			if(!@$favorites['favorites']){
+				@$favorites['favorites'] =0;
+			}
+
+		//右侧登录处调用提醒数
+		$notices= $this->db->select('notices')->where('uid',$this->session->userdata('uid'))->get('users')->row_array();
+		$data['users'] = array('favorites'=>@$favorites['favorites'],'notices'=>@$notices['notices']);
+		
+		//底部菜单(单页面)
+		$this->load->model('page_m');
+		$data['page_links'] = $this->page_m->get_page_menu(10,0);
+		
 		//全局输出
 		$this->load->vars($data);
 
@@ -179,12 +202,26 @@ class Admin_Controller extends Base_Controller
 	}
 }
 
+class Install_Controller extends Base_Controller 
+{
+	function __construct()
+	{
+		
+		parent::__construct();
+		//载入前台模板
+		$this->load->set_front_theme('default');
+
+	}
+}
+
+
 class Other_Controller extends Base_Controller 
 {
 	function __construct()
 	{
 		
 		parent::__construct();
+		$this->load->database();
 		//载入前台模板
 		$this->load->set_front_theme('default');
 

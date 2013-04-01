@@ -2,6 +2,10 @@
 
 class Myclass {
 
+	function __construct() {
+	$this->ci = & get_instance ();
+	}
+
 	// 一些常用的函数
 	// 显示时间格式化
 	function friendly_date($db_time){
@@ -140,7 +144,6 @@ class Myclass {
 	preg_match('/\[(.*)\]/', $a, $ip);
 	return @$ip[1];
 	}
-
 	function get_domain($url){
 	 $pattern = "/[w-] .(com|net|org|gov|cc|biz|info|cn)(.(cn|hk))*/";
 	 preg_match($pattern, $url, $matches);
@@ -165,6 +168,8 @@ class Myclass {
 	 }// end if(count...)www.027eat.com
 	 }// end function
 
+
+	
 }
 
 /* End of file Myclass.php */

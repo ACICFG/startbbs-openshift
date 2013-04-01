@@ -1,0 +1,6 @@
+#
+# robots.txt for StartBBS
+#
+
+User-agent: *
+Allow: /

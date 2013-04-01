@@ -1,9 +1,18 @@
 <div id='footer'>
 <div class='container' id='footer-main'>
 <ul class='page-links'>
-<!--<li><a href="/page/about" class="dark nav">StartBBS 简介</a></li>
+<?php if($page_links){?>
+<?php foreach($page_links as $key=>$v){?>
+<?php if($v['go_url']){?>
+<li><a href="<?php echo $v['go_url'];?>" class="dark nav" target=_blank><?php echo $v['title'];?></a></li>
+<?} else{?>
+<li><a href="<?php echo site_url('page/index/'.$v['pid']);?>" class="dark nav"><?php echo $v['title'];?></a></li>
+<?}?>
+<?php if($key!=10){?>
 <li class='snow'>·</li>
-<li><a href="/page/support" class="dark nav">技术支持</a></li>-->
+<?}?>
+<?}?>
+<?}?>
 </ul>
 <div class='copywrite'>
 <div class="fr"> <!--<a href="" target="_blank"><img src="" border="0" alt="Linode" width="120"></a>--></div>

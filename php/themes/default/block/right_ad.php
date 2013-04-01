@@ -2,15 +2,14 @@
 <div class='inner'>
 <span style='font-weight: bold; font-size: 10px; color: #e2e2e2;'>Promotion</span>
 <div class='sep10'></div>
-<a href="https://me.alipay.com/startbbs" class="track_event" data-action="click" data-category="ad" data-label="赞助 StartBBS 开发" target="_blank"><img alt="4d14e48c56f" border="0" height="90" src="/static/images/donations.jpg" width="250" />
-</a><div class='sep5'></div>
-<span style='font-size: 11px; color: #666;'>
+<span style='font-size: 12px; color: #666;'>
 <strong style='color: #000;'>
-<a href="https://me.alipay.com/startbbs" class="black track_event" data-action="click" data-category="ad" data-label="赞助 StartBBS 开发" target="_blank">赞助 StartBBS 开发</a>
+<a href="https://me.alipay.com/startbbs" class="black track_event" data-action="click" data-category="ad" data-label="赞助 StartBBS 开发" target="_blank">广告位:</a>
 </strong>
 </span>
 <div class='sep3'></div>
-<span style='font-size: 12px;'>如果<?=$settings['site_name']?> 对你有帮助，或许你愿意小小的赞助一下？</span>
+<span style='font-size: 12px;'><a href="http://www.startbbs.com">StartBBS</a>-一款轻量简单易用的开源社区程序</span>
+
 </div>
 </div>
 

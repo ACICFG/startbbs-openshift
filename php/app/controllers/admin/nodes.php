@@ -22,7 +22,7 @@ class Nodes extends Admin_Controller
 		$data['title'] = '删除分类';
 		$this->myclass->notice('alert("确定再删除吗！");');
 		$this->cate_m->del_cate($cid);
-		$this->myclass->notice('alert("删除分类成功！");window.location.href="/admin/nodes";');		
+		$this->myclass->notice('alert("删除分类成功！");window.location.href="'.site_url('admin/nodes').'";');		
 
 	}
 	public function add()
@@ -36,7 +36,7 @@ class Nodes extends Admin_Controller
 				'keywords'=>$this->input->post('keywords')
 			);
 			$this->cate_m->add_cate($str);
-			$this->myclass->notice('alert("添加分类成功");window.location.href="/admin/nodes";');
+			$this->myclass->notice('alert("添加分类成功");window.location.href="'.site_url('admin/nodes').'";');
 		}
 		$pid=0;
 		$data['cates']=$this->cate_m->get_cates_by_pid($pid);
@@ -49,7 +49,7 @@ class Nodes extends Admin_Controller
 		if($_POST){
 			$pid = $this->input->post('pid');
 			$this->cate_m->move_cate($cid,$pid);
-			$this->myclass->notice('alert("移动分类成功");window.location.href="/admin/nodes";');
+			$this->myclass->notice('alert("移动分类成功");window.location.href="'.site_url('admin/nodes').'";');
 		}
 		$pid=0;
 		$data['cid']=$this->uri->segment(4);
@@ -68,7 +68,7 @@ class Nodes extends Admin_Controller
 				'keywords'=>$this->input->post('keywords')
 			);
 			if($this->cate_m->update_cate($cid, $str)){
-				$this->myclass->notice('alert("修改分类成功");window.location.href="/admin/nodes";');
+				$this->myclass->notice('alert("修改分类成功");window.location.href="'.site_url('admin/nodes').'";');
 			}
 
 		}

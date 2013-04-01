@@ -17,10 +17,10 @@
 <div class='cell'>
 <div class='fr'>
 <div class='btn-group'>
-<a href="/admin/links/add" class="btn btn-small" data-remote="true">添加链接</a>
+<a href="<?php echo site_url('admin/links/add');?>" class="btn btn-small" data-remote="true">添加链接</a>
 </div>
 </div>
-<a href="/" class="startbbs1">StartBBS</a> <span class="chevron">&nbsp;›&nbsp;</span> <a href="/admin">管理后台</a> <span class="chevron">&nbsp;›&nbsp;</span> <?=$title?>
+<a href="/" class="startbbs1">StartBBS</a> <span class="chevron">&nbsp;›&nbsp;</span> <a href="<?php echo site_url('admin/');?>">管理后台</a> <span class="chevron">&nbsp;›&nbsp;</span> <?=$title?>
 </div>
 <div class='cell'>
 <?php if($links){?>
@@ -52,8 +52,8 @@
 <small class='fade1'><?php if($v['is_hidden']==0){?>显示<?} else {?>隐藏<?}?></small>
 </td>
 <td class='w100'>
-<a href="/admin/links/edit/<?=$v['id']?>" class="btn btn-small">编辑</a>
-<a href="/admin/links/del/<?=$v['id']?>" class="btn btn-small btn-danger" data-confirm="真的要删除吗？" data-method="delete" rel="nofollow">删除</a>
+<a href="<?php echo site_url('admin/links/edit/'.$v['id']);?>" class="btn btn-small">编辑</a>
+<a href="<?php echo site_url('admin/links/del/'.$v['id']);?>" class="btn btn-small btn-danger" data-confirm="真的要删除吗？" data-method="delete" rel="nofollow">删除</a>
 </td>
 </tr>
 <?php } ?>

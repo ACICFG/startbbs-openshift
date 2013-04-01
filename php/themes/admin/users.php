@@ -16,14 +16,14 @@
 <div class='box'>
 <div class='cell'>
 <div class='fr'>
-<form accept-charset="UTF-8" action="/admin/users" class="form-search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+<form accept-charset="UTF-8" action="<?php echo site_url('admin/users');?>" class="form-search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
 <div class='input-append'>
 <input class="span2 search-query" id="nickname" name="nickname" placeholder="用户昵称" type="text" />
 <input class="btn" name="commit" type="submit" value="搜索" />
 </div>
 </form>
 </div>
-<a href="/" class="startbbs1">StartBBS</a> <span class="chevron">&nbsp;›&nbsp;</span> <a href="/admin">管理后台</a> <span class="chevron">&nbsp;›&nbsp;</span> 用户
+<a href="/" class="startbbs1">StartBBS</a> <span class="chevron">&nbsp;›&nbsp;</span> <a href="<?php echo site_url('admin/');?>">管理后台</a> <span class="chevron">&nbsp;›&nbsp;</span> 用户
 </div>
 <div class='cell'>
 <table class='table'>
@@ -43,7 +43,7 @@
 <td align='right'><?=$v['uid']?></td>
 <td align='left' class='auto'>
 <strong>
-<a href="/member/admin" class="black startbbs profile_link" title="admin"><?=$v['username']?></a>
+<a href="<?php echo site_url('user/info/'.$v['uid']);?>" class="black startbbs profile_link" title="admin"><?=$v['username']?></a>
 </strong>
 </td>
 <td align='left' class='w50'>
@@ -54,7 +54,7 @@
 <?=$v['money']?>
 </td>
 <td class='center'>
-<a href="/admin/users/edit/<?=$v['uid']?>" class="btn btn-small">修改用户信息</a>
+<a href="<?php echo site_url('admin/users/edit/'.$v['uid']);?>" class="btn btn-small">修改用户信息</a>
 </td>
 </tr>
 <?}?>

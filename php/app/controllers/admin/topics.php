@@ -19,7 +19,7 @@ class Topics extends Admin_Controller
 		$limit = 20;
 		$config['uri_segment'] = 4;
 		$config['use_page_numbers'] = TRUE;
-		$config['base_url'] = '/admin/topics/index/';
+		$config['base_url'] = site_url('admin/topics/index/');
 		$config['total_rows'] = $this->db->count_all('forums');
 		$config['per_page'] = $limit;
 		$config['prev_link'] = '&larr;';
@@ -57,7 +57,7 @@ class Topics extends Admin_Controller
 		//删除贴子及它的回复
 		if($this->forum_m->del_forum($fid,$cid,$uid)){
 		$this->comment_m->del_comments_by_fid($fid,$uid);
-		$this->myclass->notice('alert("删除贴子成功！");window.location.href="/admin/topics";');
+		$this->myclass->notice('alert("删除贴子成功！");window.location.href="'.site_url('admin/topics').'";');
 		}
 
 	}
@@ -73,7 +73,7 @@ class Topics extends Admin_Controller
 				'keywords'=>$this->input->post('keywords')
 			);
 			if($this->cate_m->update_cate($cid, $str)){
-				$this->myclass->notice('alert("修改分类成功");window.location.href="/admin/nodes";');
+				$this->myclass->notice('alert("修改分类成功");window.location.href="'.site_url('admin/nodes').'";');
 			}
 
 		}

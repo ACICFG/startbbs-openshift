@@ -18,7 +18,7 @@
 						var dbpwd = $("#txtPassword").val();
 						var dbprefix = $("#txtPrefix").val();
 						$.ajax({
-							url:"/install/check",
+							url:siteurl+"/install/check",
 							data:{
 								dbhost:dbhost,
 								dbport:dbport,
@@ -173,7 +173,7 @@
 </div>
 </div>
 </div>
-<form action="/install/step" class="form-horizontal" method="post" id="dbform">
+<form action="<?php echo site_url('install/step');?>" class="form-horizontal" method="post" id="dbform">
 <div class='row'>
 <div class='box span8'>
 <div class='cell'>
@@ -260,6 +260,13 @@
 <small class='help-inline' id="infoEmail">必填</small>
 </div>
 </div>
+<div class='control-group'>
+<label class="control-label" for="settings_site_name">安装目录</label>
+<div class='controls'>
+<input id="txtUrl" name="base_url" type="text" value="" />
+<small class='help-inline' id="infoUrl">根目录请留空</small>
+</div>
+</div>
 <div class='form-actions'>
 <!--<input id="btnSubmit" class="btn btn-white btn-primary" name="commit" type="submit" value="下一步" />-->
 <a id="btnSubmit" href="javascript:void()" class="left btn btn-white btn-primary"><span>点此安装</span></a>
@@ -286,7 +293,7 @@
 <small class='muted'>
 Powered by
 <a href="http://www.startbbs.com" class="muted" target="_blank">StartBBS</a>
-1.0.0.alpha
+<?=$this->config->item('version');?>
 </small>
 </div>
 </div>

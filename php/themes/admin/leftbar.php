@@ -6,12 +6,12 @@
 <div class='cell'>
 Dashboard
 &nbsp;
-<a href="/admin/login" class="current_item">运行状态</a>
+<a href="<?php echo site_url('admin/login');?>" class="current_item">运行状态</a>
 </div>
 <div class='cell'>
 Settings
 &nbsp;
-<a href="/admin/site_settings">基本设置</a>
+<a href="<?php echo site_url('admin/site_settings');?>">基本设置</a>
 </div>
 <!--<div class='cell'>
 <img align="absmiddle" alt="Palette" src="/assets/admin/palette-29b0e5cd214d642c9ea3c0ae4f6a3019.png" valign="middle" />
@@ -21,22 +21,27 @@ Settings
 <div class='cell'>
 Users
 &nbsp;
-<a href="/admin/users">用户</a>
+<a href="<?php echo site_url('admin/users');?>">用户</a>
 </div>
 <div class='cell'>
 Nodes
 &nbsp;
-<a href="/admin/nodes">版块结点</a>
+<a href="<?php echo site_url('admin/nodes');?>">版块结点</a>
 </div>
 <div class='cell'>
 Topics
 &nbsp;
-<a href="/admin/topics">讨论话题</a>
+<a href="<?php echo site_url('admin/topics');?>">讨论话题</a>
 </div>
 <div class='cell'>
 Links
 &nbsp;
-<a href="/admin/links">链接</a>
+<a href="<?php echo site_url('admin/links');?>">链接</a>
+</div>
+<div class='cell'>
+Page
+&nbsp;
+<a href="<?php echo site_url('admin/page');?>">单页面</a>
 </div>
 <!--<div class='cell'>
 <img align="absmiddle" alt="Pages" src="/assets/admin/pages-35f97f71adb2980521de5cb0e3c65c14.png" valign="middle" />

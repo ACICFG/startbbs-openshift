@@ -16,10 +16,10 @@
 <a href="/" class="startbbs"><?=$settings['site_name']?></a> <span class="chevron">&nbsp;›&nbsp;</span> 设置
     <ul class="nav nav-tabs" style="margin-top:10px;">
     <li>
-    <a href="/user/settings">个人信息</a>
+    <a href="<?php echo site_url('user/settings');?>">个人信息</a>
     </li>
     <li class="active"><a href="#">头像</a></li>
-    <li><a href="/user/setpwd">修改密码</a></li>
+    <li><a href="<?php echo site_url('user/setpwd');?>">修改密码</a></li>
     </ul>
 </div>
 

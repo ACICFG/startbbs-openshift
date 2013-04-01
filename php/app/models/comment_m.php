@@ -3,7 +3,9 @@
 #doc
 #	classname:	Comment_m
 #	scope:		PUBLIC
-#
+#	StartBBS起点轻量开源社区系统
+#	author :doudou QQ:858292510 startbbs@126.com
+#	Copyright (c) 2013 http://www.startbbs.com All rights reserved.
 #/doc
 
 class Comment_m extends SB_Model
@@ -18,9 +20,9 @@ class Comment_m extends SB_Model
 	{
 		$this->db->insert('comments', $data);
 	}
-	function get_comment($fid){
+	function get_comment($fid,$order='desc'){
 		$this->db->select('comments.*, u.uid, u.username, u.avatar, u.signature');
-		$query=$this->db->from('comments')->where('fid',$fid)->join ( 'users u', "u.uid=comments.uid" )->order_by('comments.replytime','desc')->get();
+		$query=$this->db->from('comments')->where('fid',$fid)->join ( 'users u', "u.uid=comments.uid" )->order_by('comments.replytime',$order)->get();
 		return $query->result_array();
 	}
 	public function get_comments_by_uid($uid,$num)
